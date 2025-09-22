@@ -1,0 +1,360 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    /* evitamos scroll normal */
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor horizontal */
+.horizontal-scroll {
+    display: flex;
+    height: 100vh;
+    width: max-content;
+    transition: transform 0.6s ease;
+}
+
+/* Secciones = pantalla completa */
+header,
+section {
+    flex: 0 0 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px;
+}
+
+/*========================= Portada ==========================*/
+
+/* Imagen de fondo */
+#frontpage {
+    background: url("img/portada.jpg") center center / cover no-repeat;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Caja blanca con el nombre */
+#frontpage .name-box {
+    background: white;
+    padding: 15px 86px;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transform: translate(-380px, 0px);
+    /* Elegir la posición de la caja */
+}
+
+/*Título de la página*/
+#frontpage .name-box h1 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.2rem;
+    color: #111;
+}
+
+/* Nombre en negrita */
+#frontpage .name-box .bold {
+    font-weight: 700;
+}
+
+/*========================= Fin Portada ==========================*/
+
+/* ====== Sidebar desplegable ====== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -325px;
+    /* oculto inicialmente */
+    width: 305px;
+    height: 100vh;
+    background: #ffffff;
+    color: white;
+    transition: left 0.7s ease;
+    z-index: 100;
+    border: 1px solid rgba(72, 72, 72, 0.6);
+    /* línea fina negra alrededor */
+
+    /* centrado del contenido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    /* centrado de la lista */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.sidebar nav ul li {
+    margin: 18px 0;
+}
+
+.sidebar nav ul li a {
+    position: relative;
+    display: inline-block;
+    color: #111;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    transition: padding-left 0.3s ease, color 0.3s;
+}
+
+/* Flecha oculta inicialmente */
+.sidebar nav ul li a::before {
+    content: "➔";
+    position: absolute;
+    left: -25px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    color: #111;
+}
+
+/* Al pasar el ratón, el texto se mueve y aparece la flecha */
+.sidebar nav ul li a:hover {
+    color: #aaa;
+    padding-left: 10px;
+}
+
+.sidebar nav ul li a:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.sidebar.active {
+    left: 0;
+    /* visible */
+}
+
+/* ===== Botón hamburguesa estilo burbuja ===== */
+.menu-toggle {
+    position: fixed;
+    top: 50%;
+    /* centrado vertical */
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    background: transparent;
+    /* transparente */
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    /* contorno blanco semitransparente */
+    color: white;
+    cursor: pointer;
+    z-index: 110;
+    padding: 10px 14px;
+    border-radius: 50%;
+    /* forma redondeada tipo burbuja */
+    transition: border-color 0.3s, transform 0.2s;
+
+    /* sombra suave alrededor del círculo */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 3);
+    /* contorno alrededor del símbolo ☰ */
+    text-shadow: 0 0 4px rgba(65, 65, 65, 3);
+}
+
+/* Efecto Hover, se ilumina al pasar*/
+.menu-toggle:hover {
+    border-color: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Ocultar el botón hamburguesa cuando el sidebar está abierto */
+.menu-toggle.hidden {
+    display: none;
+}
+
+
+/* ===== Botón cerrar (✕) dentro del sidebar ===== */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #aaa;
+    transform: scale(1.1);
+}
+
+/*========================= ABOUT ME ==========================*/
+#about {
+    background: #f7f5f5;
+    color: #000000;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    padding: 60px;
+
+}
+
+/* Título arriba a la izquierda */
+#about .about-title {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* Texto centrado un poco hacia la derecha */
+#about .about-text {
+    max-width: 600px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-top: -78px;
+    /* súbelo */
+    transform: translateY(40px);
+    /* hacia abajo */
+    font-family: Adobe Garamond Pro, serif;
+}
+
+/* Firma abajo a la izquierda */
+#about .about-signature {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    font-size: 1.6rem;
+    font-family: 'Tangerine', cursive;
+    /* Fuente manuscrita */
+    opacity: 0.7;
+}
+
+/*========================= FIN ABOUT ME ==========================*/
+
+
+
+
+/*========================= SKILLS ==========================*/
+#skills {
+    background: linear-gradient(135deg, #eaad78, #ffffff, #86d1ee);
+    color: #111;
+    position: relative;
+    padding: 60px;
+    text-align: center;
+}
+
+.skills-container {
+    margin-bottom: 200px;
+}
+
+.skills-title {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.skills-filter {
+    display: inline-flex;
+    background: #ffffff;
+    border-radius: 30px;
+    border: 3px solid #f5f5dc;
+    padding: 7px 30px;
+    gap: 0px;
+}
+
+.skills-filter button {
+    border: none;
+    background: transparent;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background 0.3s, color 0.3s;
+    color: #555;
+}
+
+.skills-filter button.active, .skills-filter button:hover {
+    background: white;
+    color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.skills-group {
+    display: none;
+}
+
+.skills-group.active {
+    display: block;
+}
+
+.skills-logos {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.skills-logos img {
+    width: 60px;
+    height: auto;
+}
+
+#skills h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 6px 14px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/*========================= FIN SKILLS ==========================*/
+
+/* ====== Resto de secciones ====== */
+#projects {
+    background: #666;
+    color: #fff;
+}
+
+#certifications {
+    background: #aaa;
+    color: #111;
+}
+
+#contact {
+    background: #ddd;
+    color: #111;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-family: 'Audiowide', sans-serif;
+}
+
+p,
+li {
+    font-size: 1.2rem;
+}

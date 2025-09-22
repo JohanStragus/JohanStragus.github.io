@@ -1,11 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Porfolio - Juan Martín</title>
+    <title>Portfolio - Juan Martín</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <p>JUAN MARTÍN</p>
+    <!-- BOTÓN DEL SIDEBAR ABRIR -->
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+        <!-- BOTÓN SIDEBAR CERRAR -->
+        <button id="close-sidebar" class="close-btn" aria-label="Cerrar menú">✕</button>
+        <nav>
+            <ul>
+                <li><a href="#frontpage">Portada</a></li>
+                <li><a href="#about">Sobre mí</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#certifications">Certificaciones</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenedor que se desplazará en horizontal -->
+    <div class="horizontal-scroll">
+
+        <!-- HEADER -->
+        <header id="frontpage">
+            <div class="name-box">
+                <h1><span class="bold">JUAN</span> MARTÍN</h1>
+            </div>
+        </header>
+
+        <!-- SECCIÓN ABOUT ME -->
+        <section id="about">
+            <h2 class="about-title">Sobre mí</h2>
+            <p class="about-text">
+                Soy Juan Martín, desarrollador web apasionado por crear experiencias
+                limpias, minimalistas y funcionales. dadadad dad dada daaaaaa dadada
+                dada dadadad dad dada daaaaaa dadada dada dada dadadad dad dada daaa
+                dadada dada dadadad dad dada daaaaaa dadada dada dadadad dad dada da.<br><br>
+
+                dadada dada dadadad dad dada daaaaaa dadada dada dadadad dad dada daaaaaa
+                dadada dada dadadad dad dada daaaaaa dadada dada dadadad dad dada daaaaaa
+                dadada dada dadadad dad dada daaaaaa dadada dada dadadad dad.dadadadaddad<br><br>
+
+                dadada dada dadadad dad dada daaaaaa dadada dada dadadad dad dada daaaaaa
+                dadada dada dadadad dad dada daaaaaa dadada dada dadadad dad dada daaaaaa
+                dadada dada dadadad dad dada daaaaaa dadada dada dadadad dad.dadadadaddad.
+            </p>
+            <span class="about-signature">Juan Martín</span>
+        </section>
+
+        <!-- SECCION DE SKILLS -->
+        <section id="skills">
+            <!-- Título -->
+            <h2 class="skills-title">Habilidades</h2>
+
+            <!-- Contenido de categorías -->
+            <div class="skills-container">
+
+                <!-- Frontend -->
+                <div class="skills-group" data-category="frontend">
+                    <h3>Frontend</h3>
+                    <div class="skills-logos">
+                        <img src="img/html.png" alt="HTML">
+                        <img src="img/css.png" alt="CSS">
+                        <img src="img/js.png" alt="JavaScript">
+                        <img src="img/bootstrap.png" alt="Bootstrap">
+                        <img src="img/angular.png" alt="Angular">
+                        <img src="img/github.png" alt="github">
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="skills-group" data-category="backend">
+                    <h3>Backend</h3>
+                    <div class="skills-logos">
+                        <img src="img/java.png" alt="java">
+                        <img src="img/php.png" alt="php">
+                        <img src="img/sql.png" alt="sql">
+                        <img src="img/oracle.png" alt="oracle">
+                        <img src="img/laravel.png" alt="laravel">
+                        <img src="img/docker.png" alt="docker">
+                        <img src="img/github.png" alt="github">
+                    </div>
+                </div>
+
+                <!-- Data Analyst -->
+                <div class="skills-group" data-category="data">
+                    <h3>Data Analyst</h3>
+                    <div class="skills-logos">
+                        <img src="img/excel.png" alt="excel">
+                        <img src="img/sql.png" alt="sql">
+                        <img src="img/powerbi.webp" alt="powerbi">
+                        <img src="img/python.png" alt="Python">
+                        <img src="img/github.png" alt="github">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtro -->
+            <div class="skills-filter">
+                <button data-category="frontend" class="active">Frontend</button>
+                <button data-category="backend">Backend</button>
+                <button data-category="data">Data Analyst</button>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Proyectos</h2>
+            <p>Descripción breve de los proyectos.</p>
+        </section>
+
+        <section id="certifications">
+            <h2>Certificaciones</h2>
+            <ul>
+                <li>Certificación 1</li>
+                <li>Certificación 2</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>Contacto</h2>
+            <p>Escríbeme a: <a href="mailto:joanmartinarnaiz@gmail.com">joanmartinarnaiz@gmail.com</a></p>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
