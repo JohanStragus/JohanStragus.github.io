@@ -56,6 +56,8 @@ if (closeBtn) {
         menuToggle.classList.remove("hidden"); // volver a mostrar el botón ☰
     });
 }
+///////////////// FIN APARTADO DE SIDEBAR //////////////////
+
 
 ///////////////// APARTADO HABILIDADES //////////////////
 
@@ -84,3 +86,28 @@ skillButtons.forEach(btn => {
 
 // Inicialización: mostramos frontend por defecto
 showSkills("frontend");
+
+///////////////// FIN APARTADO HABILIDADES //////////////////
+
+
+/////////////// APARTADO CARRUSEL 3D //////////////////
+const carousel = document.querySelector(".carousel");
+let angle = 0;
+
+// Botones de control
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+if (prevBtn && nextBtn) {
+    prevBtn.addEventListener("click", () => {
+        angle += 90; // gira hacia atrás
+        carousel.style.transform = `rotateY(${angle}deg)`;
+    });
+
+    nextBtn.addEventListener("click", () => {
+        angle -= 90; // gira hacia adelante
+        carousel.style.transform = `rotateY(${angle}deg)`;
+    });
+}
+
+/////////////// FIN APARTADO CARRUSEL 3D //////////////////
