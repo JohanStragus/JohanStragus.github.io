@@ -69,7 +69,7 @@ section {
 
 /*========================= Fin Portada ==========================*/
 
-/*========================= SIDEBAR ==========================*/
+/*========================= SIDEBAR Y BOTÓN ==========================*/
 .sidebar {
     position: fixed;
     top: 0;
@@ -188,6 +188,9 @@ section {
     transform: scale(1.1);
 }
 
+/*========================= FIN SIDEBAR Y BOTÓN ==========================*/
+
+
 /*========================= ABOUT ME ==========================*/
 #about {
     background: #fffdfd;
@@ -239,82 +242,59 @@ section {
 
 
 /*========================= SKILLS ==========================*/
+/* ========================= SKILLS ========================== */
 #skills {
     background: #ffffff;
-    color: #111;
+    color: #000000;
     position: relative;
     padding: 60px;
     text-align: center;
 }
 
-.skills-container {
-    margin-bottom: 200px;
-}
-
+/* Título arriba izquierda */
 .skills-title {
     position: absolute;
     top: 40px;
     left: 40px;
     font-size: 2rem;
     font-weight: 700;
+    padding-bottom: 5px;
 }
 
-.skills-filter {
-    display: inline-flex;
-    background: #ffffff;
-    border-radius: 30px;
-    border: 3px solid #f5f5dc;
-    padding: 7px 30px;
-    gap: 0px;
-}
-
-.skills-filter button {
-    border: none;
-    background: transparent;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 25px;
-    transition: background 0.3s, color 0.3s;
-    color: #555;
-}
-
-.skills-filter button.active,
-.skills-filter button:hover {
-    background: white;
-    color: black;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
-}
-
-.skills-group {
-    display: none;
-}
-
-.skills-group.active {
-    display: block;
-}
-
+/* Grid de logos */
 .skills-logos {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 20px;
-    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 25px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 0px;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .skills-logos img {
     width: 60px;
     height: auto;
+    transition: transform 0.3s ease;
 }
 
-#skills h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    background: rgba(0, 0, 0, 0.05);
-    padding: 6px 14px;
-    border-radius: 6px;
-    display: inline-block;
-    margin-bottom: 20px;
+/* Firma en Skills */
+.skills-signature {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    font-family: "Tangerine", cursive;
+    font-size: 2rem;
+    opacity: 0.8;
+    color: #939393;
+}
+
+
+.skills-logos img:hover {
+    transform: scale(1.2);
 }
 
 /*========================= FIN SKILLS ==========================*/
@@ -352,6 +332,7 @@ section {
 /* Tarjetas individuales */
 .project-card {
     background: white;
+    /* Posiblemente imagen del projecto */
     border-radius: 8px;
     padding: 80px 40px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -360,13 +341,13 @@ section {
     width: 100%;
     max-width: 250px;
     text-align: center;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.2s ease;
 }
 
 /* Efecto hover */
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0px 25px 80px rgba(255, 191, 0, 0.7);
+    box-shadow: 0px 25px 80px rgb(255, 102, 0);
 }
 
 /*========================= FIN PROJECTS ==========================*/
@@ -452,7 +433,7 @@ section {
 }
 
 
-/* Colocamos 4 items en círculo */
+/* Colocamos 4 items en círculo, a medida que añadamos más añadimos más */
 .carousel-item:nth-child(1) {
     transform: rotateY(0deg) translateZ(400px);
 }
@@ -472,21 +453,63 @@ section {
 
 /*========================= FIN CERTIFICATIONS ==========================*/
 
-/* ====== Resto de secciones ====== */
+
+/* ========================= CONTACT ========================== */
 #contact {
-    background: #ddd;
+    background: rgb(247, 247, 247);
     color: #111;
+    position: relative;
+    padding: 60px;
+    text-align: center;
 }
 
+/* Título Contacto */
+.contact-title {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
+    padding-bottom: 30px;
+    font-family: 'apparel', serif;
+}
+
+/* Redes sociales centradas */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 27px;
+    margin: 40px 0;
+}
+
+.social-icons a img {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.social-icons a img:hover {
+    transform: scale(1.3);
+    opacity: 0.8;
+}
+
+/* Frase abajo */
+.contact-quote {
+    margin-top: 40px;
+    font-size: 1.4rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* ========================= FIN CONTACT ========================= */
+
+
+/* ====== Resto de secciones ====== */
 h2 {
     font-size: 2rem;
     margin-bottom: 20px;
     font-family: 'playfair display', serif;
 }
 
-p,
-li {
+p,li {
     font-size: 1.2rem;
 }
-
-
