@@ -4,12 +4,20 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+/* Fuente personalizada Apparel */
+@font-face {
+    font-family: 'Apparel';
+    src: url('fonts/Apparel-Regular.woff2') format('woff2'),
+        url('fonts/Apparel-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+html, body {
     height: 100%;
     overflow: hidden;
-    /* evitamos scroll normal */
-    font-family: Arial, sans-serif;
+    font-family: 'Apparel', serif;
 }
 
 /* Contenedor horizontal */
@@ -244,7 +252,7 @@ section {
 /*========================= SKILLS ==========================*/
 /* ========================= SKILLS ========================== */
 #skills {
-    background: #ffffff;
+    background: rgb(255, 251, 251);
     color: #000000;
     position: relative;
     padding: 60px;
@@ -264,7 +272,7 @@ section {
 /* Grid de logos */
 .skills-logos {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); 
+    grid-template-columns: repeat(6, 1fr);
     gap: 25px;
     justify-items: center;
     align-items: center;
@@ -456,7 +464,7 @@ section {
 
 /* ========================= CONTACT ========================== */
 #contact {
-    background: rgb(247, 247, 247);
+    background: rgb(255, 255, 255);
     color: #111;
     position: relative;
     padding: 60px;
@@ -470,7 +478,7 @@ section {
     margin-bottom: 10px;
     display: inline-block;
     padding-bottom: 30px;
-    font-family: 'apparel', serif;
+    font-family: 'Apparel', serif;
 }
 
 /* Redes sociales centradas */
@@ -504,12 +512,24 @@ section {
 
 
 /* ====== Resto de secciones ====== */
+
+/* Focus visible accesible (solo al usar teclado) */
+:focus-visible {
+    outline: 3px solid #FFD700;
+    outline-offset: 2px;
+}
+
+/* Sidebar: permitir scroll si el contenido crece */
+.sidebar {
+    overflow-y: auto;
+}
+
 h2 {
     font-size: 2rem;
     margin-bottom: 20px;
-    font-family: 'playfair display', serif;
+    font-family: 'Apparel', serif;
 }
 
-p,li {
+p, li {
     font-size: 1.2rem;
 }

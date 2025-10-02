@@ -2,23 +2,23 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - Juan Martín</title>
     <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <!-- BOTÓN DEL SIDEBAR ABRIR -->
-    <button id="menu-toggle" class="menu-toggle">☰</button>
+    <button id="menu-toggle" class="menu-toggle" type="button" aria-controls="sidebar" aria-expanded="false"
+        aria-label="Abrir menú">☰</button>
 
     <!-- SIDEBAR -->
-    <aside id="sidebar" class="sidebar">
+    <aside id="sidebar" class="sidebar" aria-hidden="true">
         <!-- BOTÓN SIDEBAR CERRAR -->
-        <button id="close-sidebar" class="close-btn" aria-label="Cerrar menú">✕</button>
-        <nav>
+        <button id="close-sidebar" class="close-btn" type="button" aria-label="Cerrar menú">✕</button>
+        <nav aria-label="Navegación principal">
             <ul>
                 <li><a href="#frontpage">Portada</a></li>
                 <li><a href="#about">Sobre mí</a></li>
@@ -31,18 +31,18 @@
     </aside>
 
     <!-- Contenedor que se desplazará en horizontal -->
-    <div class="horizontal-scroll">
-
+    <main id="main" class="horizontal-scroll" role="main">
         <!-- HEADER -->
-        <header id="frontpage">
+        <header id="frontpage" role="banner">
             <div class="name-box">
                 <h1><span class="bold">JUAN</span> MARTÍN</h1>
             </div>
         </header>
 
         <!-- SECCIÓN ABOUT ME -->
-        <section id="about">
-            <h2 class="about-title">Sobre mí</h2>
+        <section id="about" aria-labelledby="about-title">
+            <h2 id="about-title" class="about-title">Sobre mí</h2>
+            <!-- Mantenemos exactamente tu texto y estructura -->
             <p class="about-text">
                 Soy Juan Martín, desarrollador web apasionado por crear experiencias
                 limpias, minimalistas y funcionales. dadadad dad dada daaaaaa dadada
@@ -57,100 +57,106 @@
                 dadada dada dadadad dad dada daaaaaa dadada dada dadadad dad dada daaaaaa
                 dadada dada dadadad dad dada daaaaaa dadada dada dadadad dad.dadadadaddad.
             </p>
-            <span class="about-signature">Juan Martín</span>
+            <span class="about-signature" aria-hidden="true">Juan Martín</span>
         </section>
 
         <!-- SECCION DE SKILLS -->
-        <section id="skills">
-            <h2 class="skills-title">Habilidades</h2>
+        <section id="skills" aria-labelledby="skills-title">
+            <h2 id="skills-title" class="skills-title">Habilidades</h2>
 
-            <div class="skills-logos">
-                <img src="img/html.png" alt="HTML">
-                <img src="img/css.png" alt="CSS">
-                <img src="img/js.png" alt="JavaScript">
-                <img src="img/bootstrap.png" alt="Bootstrap">
-                <img src="img/angular.png" alt="Angular">
-                <img src="img/github.png" alt="GitHub">
-                <img src="img/java.png" alt="Java">
-                <img src="img/php.png" alt="PHP">
-                <img src="img/sql.png" alt="SQL">
-                <img src="img/oracle.png" alt="Oracle">
-                <img src="img/laravel.png" alt="Laravel">
-                <img src="img/docker.png" alt="Docker">
-                <img src="img/excel.png" alt="Excel">
-                <img src="img/powerbi.webp" alt="Power BI">
-                <img src="img/python.png" alt="Python">
+            <div class="skills-logos" role="list">
+                <img src="img/html.png" alt="HTML" loading="lazy" role="listitem">
+                <img src="img/css.png" alt="CSS" loading="lazy" role="listitem">
+                <img src="img/js.png" alt="JavaScript" loading="lazy" role="listitem">
+                <img src="img/bootstrap.png" alt="Bootstrap" loading="lazy" role="listitem">
+                <img src="img/angular.png" alt="Angular" loading="lazy" role="listitem">
+                <img src="img/github.png" alt="GitHub" loading="lazy" role="listitem">
+                <img src="img/java.png" alt="Java" loading="lazy" role="listitem">
+                <img src="img/php.png" alt="PHP" loading="lazy" role="listitem">
+                <img src="img/sql.png" alt="SQL" loading="lazy" role="listitem">
+                <img src="img/oracle.png" alt="Oracle" loading="lazy" role="listitem">
+                <img src="img/laravel.png" alt="Laravel" loading="lazy" role="listitem">
+                <img src="img/docker.png" alt="Docker" loading="lazy" role="listitem">
+                <img src="img/excel.png" alt="Excel" loading="lazy" role="listitem">
+                <img src="img/powerbi.webp" alt="Power BI" loading="lazy" role="listitem">
+                <img src="img/python.png" alt="Python" loading="lazy" role="listitem">
             </div>
 
             <!-- Firma en Skills -->
-            <span class="skills-signature">Skilled Developer</span>
+            <span class="skills-signature" aria-hidden="true">Skill Stack</span>
         </section>
 
-
         <!-- SECCION DE PROYECTOS -->
-        <section id="projects">
-            <h2 class="projects-title">Proyectos</h2>
-            <div class="projects-grid">
-                <article class="project-card">Proyecto 1</article>
-                <article class="project-card">Proyecto 2</article>
-                <article class="project-card">Proyecto 3</article>
-                <article class="project-card">Proximamente...</article>
-                <article class="project-card">Proximamente...</article>
-                <article class="project-card">Proximamente...</article>
-                <article class="project-card">Proximamente...</article>
-                <article class="project-card">Proximamente...</article>
-                <!-- Realizar paginate en el apartado de proyectos -->
+        <section id="projects" aria-labelledby="projects-title">
+            <h2 id="projects-title" class="projects-title">Proyectos</h2>
+            <div class="projects-grid" role="list">
+                <article class="project-card" role="listitem" aria-label="Proyecto 1">Proyecto 1</article>
+                <article class="project-card" role="listitem" aria-label="Proyecto 2">Proyecto 2</article>
+                <article class="project-card" role="listitem" aria-label="Proyecto 3">Proyecto 3</article>
+                <article class="project-card" role="listitem" aria-label="Proyecto futuro">Próximamente...</article>
+                <article class="project-card" role="listitem" aria-label="Proyecto futuro">Próximamente...</article>
+                <article class="project-card" role="listitem" aria-label="Proyecto futuro">Próximamente...</article>
+                <article class="project-card" role="listitem" aria-label="Proyecto futuro">Próximamente...</article>
+                <article class="project-card" role="listitem" aria-label="Proyecto futuro">Próximamente...</article>
             </div>
         </section>
 
         <!-- SECCION DE CERTIFICACIONES -->
-        <section id="certifications">
-            <h2 class="certifications-title">Certificaciones</h2>
+        <section id="certifications" aria-labelledby="certifications-title">
+            <h2 id="certifications-title" class="certifications-title">Certificaciones</h2>
+
             <!-- Carrusel -->
-            <div class="carousel">
+            <div class="carousel" role="region" aria-label="Carrusel de certificaciones"
+                aria-roledescription="carrusel">
                 <a href="https://www.credly.com/badges/ce135fa3-1f9b-4895-98ad-129d996c4774/linked_in_profile"
-                    target="_blank" class="carousel-item">
-                    <img src="img/GoogleAnalytics.png" alt="Certificación 1">
+                    target="_blank" rel="noopener noreferrer" class="carousel-item">
+                    <img src="img/GoogleAnalytics.png" alt="Certificación Google Analytics" loading="lazy">
                 </a>
                 <a href="https://learn.microsoft.com/api/credentials/share/es-es/JuanMartinArnaiz-1887/396E82C6DB1A405C?sharingId"
-                    target="_blank" class="carousel-item">
-                    <img src="img/MicrosoftCertified.png" alt="Certificación 2">
+                    target="_blank" rel="noopener noreferrer" class="carousel-item">
+                    <img src="img/MicrosoftCertified.png" alt="Certificación Microsoft" loading="lazy">
                 </a>
                 <a href="https://www.credly.com/badges/3a1c0231-f2f4-4da2-ab60-821037695517/linked_in_profile"
-                    target="_blank" class="carousel-item">
-                    <img src="img/ibm.png" alt="Certificación 3">
+                    target="_blank" rel="noopener noreferrer" class="carousel-item">
+                    <img src="img/ibm.png" alt="Certificación IBM" loading="lazy">
                 </a>
                 <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/K6R46BO78TEU"
-                    target="_blank" class="carousel-item">
-                    <img src="img/Microsoft_Logo.png" alt="Certificación 4">
+                    target="_blank" rel="noopener noreferrer" class="carousel-item">
+                    <img src="img/Microsoft_Logo.png" alt="Certificación Coursera Microsoft" loading="lazy">
                 </a>
             </div>
 
             <!-- Controles del carrusel -->
-            <div class="carousel-controls">
-                <button id="prevBtn">Preview</button>
-                <button id="nextBtn">Next</button>
+            <div class="carousel-controls" role="group" aria-label="Controles del carrusel">
+                <button id="prevBtn" type="button" aria-label="Certificado anterior">Prev</button>
+                <button id="nextBtn" type="button" aria-label="Certificado siguiente">Next</button>
             </div>
         </section>
 
-
         <!-- SECCION DE CONTACTO -->
-        <section id="contact">
-            <h2 class="contact-title">Contacto</h2>
+        <section id="contact" aria-labelledby="contact-title">
+            <h2 id="contact-title" class="contact-title">Contacto</h2>
 
             <!-- Redes sociales -->
-            <div class="social-icons">
-                <a href="https://github.com/JohanStragus" target="_blank"><img src="img/github.png" alt="GitHub"></a>
-                <a href="https://www.linkedin.com/in/juan-m-447633185" target="_blank"><img src="img/linkedin.png"
-                        alt="LinkedIn"></a>
-                <a href="mailto:joanmartinarnaiz@gmail.com" target="_blank"><img src="img/gmail.png" alt="Gmail"></a>
-                <a href="https://www.kaggle.com/joanmartinn" target="_blank"><img src="img/kaggle.png" alt="Kaggle"></a>
+            <div class="social-icons" role="navigation" aria-label="Redes y contacto">
+                <a href="https://github.com/JohanStragus" target="_blank" rel="noopener noreferrer">
+                    <img src="img/github.png" alt="GitHub" loading="lazy">
+                </a>
+                <a href="https://www.linkedin.com/in/juan-m-447633185" target="_blank" rel="noopener noreferrer">
+                    <img src="img/linkedin.png" alt="LinkedIn" loading="lazy">
+                </a>
+                <a href="mailto:joanmartinarnaiz@gmail.com">
+                    <img src="img/gmail.png" alt="Correo Gmail">
+                </a>
+                <a href="https://www.kaggle.com/joanmartinn" target="_blank" rel="noopener noreferrer">
+                    <img src="img/kaggle.png" alt="Kaggle" loading="lazy">
+                </a>
             </div>
 
             <!-- Frase -->
             <p class="contact-quote">"Le temo más a un mono programando que a un mono disparando"</p>
         </section>
-    </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
