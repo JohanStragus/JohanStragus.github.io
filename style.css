@@ -14,7 +14,8 @@
     font-display: swap;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     overflow: hidden;
     font-family: 'Apparel', serif;
@@ -327,36 +328,61 @@ section {
 
 /* Grid de proyectos */
 .projects-grid {
+    list-style: none;
+    padding: 0;
+    margin: 60px auto 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     justify-items: center;
     align-items: center;
-    margin-top: 60px;
     width: 100%;
     max-width: 1000px;
 }
 
-/* Tarjetas individuales */
+/* Tarjeta: deja el <li> solo como contenedor de ancho */
 .project-card {
+    width: 100%;
+    max-width: 250px;
+}
+
+/* El ENLACE tiene el aspecto de tarjeta y ocupa todo el bloque */
+.project-card a {
+    display: block;
+    width: 100%;
+    height: 100%;
     background: white;
-    /* Posiblemente imagen del projecto */
     border-radius: 8px;
     padding: 80px 40px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     font-size: 1.2rem;
     font-weight: 500;
-    width: 100%;
-    max-width: 250px;
+    color: inherit;
+    text-decoration: none;
     text-align: center;
     transition: transform 0.4s ease, box-shadow 0.2s ease;
 }
 
-/* Efecto hover */
-.project-card:hover {
+.project-card a[aria-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: default;
+}
+
+
+/* Hover ahora sobre el <a> (no sobre el <li>) */
+.project-card a:hover {
     transform: translateY(-8px);
     box-shadow: 0px 25px 80px rgb(255, 102, 0);
 }
+
+/* Focus visible accesible */
+.project-card a:focus-visible {
+    outline: 3px solid #FFD700;
+    outline-offset: 4px;
+    border-radius: 8px;
+}
+
 
 /*========================= FIN PROJECTS ==========================*/
 
@@ -530,6 +556,7 @@ h2 {
     font-family: 'Apparel', serif;
 }
 
-p, li {
+p,
+li {
     font-size: 1.2rem;
 }
