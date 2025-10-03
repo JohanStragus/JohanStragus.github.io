@@ -251,14 +251,27 @@ section {
 
 
 /*========================= SKILLS ==========================*/
-/* ========================= SKILLS ========================== */
 #skills {
-    background: rgb(255, 251, 251);
+    background: rgb(249, 244, 244);
     color: #000000;
     position: relative;
     padding: 60px;
     text-align: center;
 }
+
+/* Logo de medalla grande arriba derecha */
+#skills::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 40px; 
+    width: 150px;  
+    height: 150px;
+    background: url("img/medalla.png") no-repeat center/contain;
+    opacity: 0.6;
+    pointer-events: none; 
+}
+
 
 /* Título arriba izquierda */
 .skills-title {
@@ -298,7 +311,7 @@ section {
     font-family: "Tangerine", cursive;
     font-size: 2rem;
     opacity: 0.8;
-    color: #939393;
+    color: #ffffff;
 }
 
 
@@ -536,7 +549,7 @@ section {
 
 /* ========================= CONTACT ========================== */
 #contact {
-    background: rgb(255, 255, 255);
+    background: url("img/test4.jpg") center center / cover no-repeat;
     color: #111;
     position: relative;
     padding: 60px;
@@ -551,6 +564,7 @@ section {
     display: inline-block;
     padding-bottom: 30px;
     font-family: 'Apparel', serif;
+    color: rgb(255, 255, 255);
 }
 
 /* Redes sociales centradas */
@@ -578,6 +592,7 @@ section {
     font-size: 1.4rem;
     font-style: italic;
     opacity: 0.8;
+    color: rgb(255, 255, 255);
 }
 
 /* ========================= FIN CONTACT ========================= */
