@@ -420,7 +420,7 @@ section {
     gap: 10px;
     justify-content: center;
     align-items: center;
-    margin: -100px auto 20px;
+    margin: -65px auto -10px;
     max-width: 1000px;
 }
 
