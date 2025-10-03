@@ -90,50 +90,64 @@
         <section id="projects" aria-labelledby="projects-title">
             <h2 id="projects-title" class="projects-title">Proyectos</h2>
 
+            <!-- Barra de filtros -->
+            <div class="projects-filter" role="group" aria-label="Filtrar proyectos por herramienta">
+                <button class="filter-btn active" type="button" data-tool="all">Todos</button>
+                <button class="filter-btn" type="button" data-tool="html">HTML</button>
+                <button class="filter-btn" type="button" data-tool="css">CSS</button>
+                <button class="filter-btn" type="button" data-tool="js">JavaScript</button>
+                <button class="filter-btn" type="button" data-tool="php">PHP</button>
+                <button class="filter-btn" type="button" data-tool="java">Java</button>
+                <button class="filter-btn" type="button" data-tool="python">Python</button>
+                <button class="filter-btn" type="button" data-tool="sql">SQL</button>
+            </div>
+
+            <!-- Grid de proyectos -->
             <ul class="projects-grid">
-                <li class="project-card">
+                <li class="project-card" data-tools="html, css, js">
                     <a href="https://mi-proyecto1.com" target="_blank" rel="noopener noreferrer"
                         aria-label="Abrir Proyecto 1 en nueva pestaña">
                         Proyecto 1
                     </a>
                 </li>
 
-                <li class="project-card">
+                <li class="project-card" data-tools="php, sql">
                     <a href="https://mi-proyecto2.com" target="_blank" rel="noopener noreferrer"
                         aria-label="Abrir Proyecto 2 en nueva pestaña">
                         Proyecto 2
                     </a>
                 </li>
 
-                <li class="project-card">
+                <li class="project-card" data-tools="java">
                     <a href="https://mi-proyecto3.com" target="_blank" rel="noopener noreferrer"
                         aria-label="Abrir Proyecto 3 en nueva pestaña">
                         Proyecto 3
                     </a>
                 </li>
 
-                <!-- Proyectos futuros -->
+                <!-- Proyectos futuros (sin herramientas asociadas) -->
                 <li class="project-card">
-                    <a href="#" aria-disabled="true" tabindex="-1">Próximamente...</a>
+                    <span aria-hidden="true">Próximamente...</span>
                 </li>
 
                 <li class="project-card">
-                    <a href="#" aria-disabled="true" tabindex="-1">Próximamente...</a>
+                    <span aria-hidden="true">Próximamente...</span>
                 </li>
 
                 <li class="project-card">
-                    <a href="#" aria-disabled="true" tabindex="-1">Próximamente...</a>
+                    <span aria-hidden="true">Próximamente...</span>
                 </li>
 
                 <li class="project-card">
-                    <a href="#" aria-disabled="true" tabindex="-1">Próximamente...</a>
+                    <span aria-hidden="true">Próximamente...</span>
                 </li>
 
                 <li class="project-card">
-                    <a href="#" aria-disabled="true" tabindex="-1">Próximamente...</a>
+                    <span aria-hidden="true">Próximamente...</span>
                 </li>
             </ul>
         </section>
+
 
 
 

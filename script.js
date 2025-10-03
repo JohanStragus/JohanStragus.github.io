@@ -8,6 +8,8 @@ const closeBtn = document.getElementById("close-sidebar"); // botón cerrar
 const carousel = document.querySelector(".carousel");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
+const filterBtns = document.querySelectorAll('.projects-filter .filter-btn');
+const projectCards = document.querySelectorAll('.projects-grid .project-card');
 
 let currentIndex = 0;
 let angle = 0;
@@ -103,3 +105,26 @@ if (prevBtn && nextBtn && carousel) {
     });
 }
 /////////////// FIN APARTADO CARRUSEL 3D //////////////////
+
+
+// === Filtrado de proyectos por herramienta ===
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // estado activo de botones
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selected = btn.dataset.tool; // 'all', 'html', 'css', etc.
+
+        projectCards.forEach(card => {
+            const tools = (card.dataset.tools || '')
+                .split(',')
+                .map(s => s.trim().toLowerCase())
+                .filter(Boolean);
+
+            const show = (selected === 'all') || tools.includes(selected.toLowerCase());
+            card.style.display = show ? '' : 'none';
+        });
+    });
+});
