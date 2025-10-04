@@ -626,14 +626,35 @@ li {
 
 
 /* RESPONSIVE STYLES */
+/* ==================================================================
+   RESPONSIVE (HORIZONTAL) — Versión actualizada con FIX de alineación
+   Mantiene navegación horizontal. Ancho exacto por slide = 100vw.
+   Altura moderna con svh/dvh. Ajustes de portada, proyectos y carrusel.
+   ================================================================== */
 
-/* Viewport moderno para que cada slide siga siendo una “pantalla” real */
+/* --- SLIDE WIDTH ALIGNMENT FIX --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.horizontal-scroll {
+    overflow: hidden;
+}
+
 header,
 section {
-    flex: 0 0 100svw;
-    /* ancho = pantalla */
+    flex: 0 0 100vw !important;
+    /* ancho del slide = innerWidth */
+    width: 100vw !important;
+    margin: 0;
+}
+
+/* Viewport moderno: ALTURA real en móvil */
+header,
+section {
     min-height: 100svh;
-    /* alto mínimo pantalla */
 }
 
 @supports (height: 100dvh) {
@@ -644,7 +665,18 @@ section {
     }
 }
 
-/* Transiciones y motion accesible */
+/* Overrides de altura para anular 100vh antiguos */
+.horizontal-scroll {
+    height: 100svh !important;
+}
+
+@supports (height: 100dvh) {
+    .horizontal-scroll {
+        height: 100dvh !important;
+    }
+}
+
+/* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
     .horizontal-scroll {
         transition: none !important;
@@ -656,19 +688,17 @@ section {
     }
 }
 
-/* Evitar “rebotes” / overscroll en móvil */
+/* Evitar rebotes en móvil */
 html,
 body {
     overscroll-behavior: none;
 }
 
-/* ======= FIXES GLOBALES ======= */
-/* (1) PROYECTOS: aire para título + filtros (sin solape) */
+/* ========================= FIXES GLOBALES ========================= */
 #projects {
     padding-top: 110px;
 }
 
-/* antes ~60px */
 #projects .projects-filter {
     margin: 12px auto 14px !important;
 }
@@ -677,22 +707,67 @@ body {
     margin-top: 24px;
 }
 
-/* (2) CERTIFICACIONES: encapsular carrusel para que no “sangre” fuera */
 #certifications {
     overflow: hidden;
-    /* recorta el 3D dentro de la sección */
     perspective: 1000px;
-    /* mantiene tu profundidad */
     position: relative;
     isolation: isolate;
-    /* stacking context propio */
     z-index: 0;
 }
 
-/* === ≤ 1400px (desktop mediano) === */
+#certifications .carousel {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+#certifications .carousel-item {
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+
+#certifications .carousel-controls {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 1;
+}
+
+/* PORTADA: caja de nombre adaptada */
+#frontpage .name-box {
+    max-width: min(88vw, 640px);
+    padding: clamp(10px, 1.8vh, 15px) clamp(26px, 8vw, 86px);
+    transform: translateX(clamp(-380px, -38vw, -120px));
+}
+
+#frontpage .name-box h1 {
+    font-size: clamp(0.95rem, 1.8vw + .4rem, 1.2rem);
+    letter-spacing: clamp(.08rem, .5vw, .2rem);
+}
+
+:root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+#frontpage {
+    padding-top: max(40px, var(--safe-top));
+    padding-left: max(40px, var(--safe-left));
+    padding-right: max(40px, var(--safe-right));
+    padding-bottom: max(40px, var(--safe-bottom));
+}
+
+/* ======================= BREAKPOINTS ======================= */
+
+/* ≤ 1400px */
 @media (max-width: 1400px) {
     #frontpage .name-box {
-        transform: translate(-280px, 0);
+        transform: translateX(clamp(-320px, -32vw, -120px));
         padding: 14px 68px;
     }
 
@@ -701,16 +776,13 @@ body {
         gap: 22px;
     }
 
-    /* 6→5 */
     .projects-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 26px;
     }
-
-    /* 4→3 */
 }
 
-/* === ≤ 1200px (laptops) === */
+/* ≤ 1200px */
 @media (max-width: 1200px) {
     .skills-logos img {
         width: 56px;
@@ -733,16 +805,13 @@ body {
         padding: 70px 32px;
     }
 
-    /* Proyectos: ajusta aire en este breakpoint también */
     #projects {
         padding-top: 104px;
     }
 }
 
-/* === ≤ 992px (tablets grandes en horizontal) === */
+/* ≤ 992px */
 @media (max-width: 992px) {
-
-    /* Sidebar un poco más estrecha, sigue flotando encima del carrusel horizontal */
     .sidebar {
         width: 270px;
         left: -290px;
@@ -771,7 +840,6 @@ body {
         gap: 20px;
     }
 
-    /* 5→4 */
     .skills-logos img {
         width: 54px;
     }
@@ -787,7 +855,6 @@ body {
         padding: 58px 26px;
     }
 
-    /* Carrusel 3D un poco más compacto —> scopeado a CERTIFICACIONES */
     #certifications .carousel {
         width: 260px;
         height: 180px;
@@ -814,16 +881,17 @@ body {
         transform: rotateY(270deg) translateZ(340px);
     }
 
-    /* Proyectos: un pelín menos de padding top en pantallas más compactas */
     #projects {
         padding-top: 100px;
     }
+
+    #frontpage .name-box {
+        transform: translateX(clamp(-240px, -28vw, -110px));
+    }
 }
 
-/* === ≤ 768px (tablets / móviles en horizontal) === */
+/* ≤ 768px */
 @media (max-width: 768px) {
-
-    /* Mantenemos HORIZONTAL: cada slide sigue midiendo 100svw/100dvh */
     .menu-toggle {
         top: 16px;
         transform: none;
@@ -833,7 +901,7 @@ body {
     }
 
     #frontpage .name-box {
-        transform: translate(-200px, 0);
+        transform: translateX(clamp(-220px, -28vw, -100px));
         padding: 12px 40px;
     }
 
@@ -877,7 +945,6 @@ body {
         max-width: 620px;
     }
 
-    /* 4→3 */
     .skills-logos img {
         width: 50px;
     }
@@ -893,7 +960,6 @@ body {
         max-width: 700px;
     }
 
-    /* 3→2 */
     .project-card {
         max-width: none;
     }
@@ -943,18 +1009,15 @@ body {
         font-size: 1.1rem;
     }
 
-    /* Proyectos: ajuste de aire acorde al título a 24px */
     #projects {
         padding-top: 96px;
     }
 }
 
-/* === ≤ 560px (móvil en horizontal y vertical) === */
+/* ≤ 560px */
 @media (max-width: 560px) {
-
-    /* Seguimos horizontal: cada sección ocupa toda la “pantalla” del móvil */
     #frontpage .name-box {
-        transform: translate(-120px, 0);
+        transform: translateX(clamp(-140px, -22vw, -60px));
         padding: 10px 28px;
     }
 
@@ -963,7 +1026,6 @@ body {
         gap: 14px;
     }
 
-    /* 3→2 */
     .skills-logos img {
         width: 46px;
     }
@@ -997,13 +1059,20 @@ body {
         font-size: .95rem;
     }
 
-    /* Proyectos: un poco menos de aire en móviles muy pequeños */
     #projects {
         padding-top: 92px;
     }
 }
 
-/* Orientación apaisada baja altura (teclado abierto, notch, etc.) */
+/* ≤ 380px */
+@media (max-width: 380px) {
+    #frontpage .name-box {
+        transform: none;
+        margin: 0 auto;
+    }
+}
+
+/* Apaisada con poca altura */
 @media (orientation: landscape) and (max-height: 460px) {
 
     header,
@@ -1014,30 +1083,5 @@ body {
 
     .contact-title {
         font-size: 2.4rem;
-    }
-}
-
-
-/* ================= OVERRIDE: viewport alto real =================
-   Asegura que cada slide use el alto real del viewport en móviles.
-   Anula 'height: 100vh' previos que puedan existir.
-================================================================= */
-.horizontal-scroll {
-    height: 100svh !important;
-}
-
-header,
-section {
-    height: 100svh !important;
-}
-
-@supports (height: 100dvh) {
-    .horizontal-scroll {
-        height: 100dvh !important;
-    }
-
-    header,
-    section {
-        height: 100dvh !important;
     }
 }
