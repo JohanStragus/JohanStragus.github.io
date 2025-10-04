@@ -264,12 +264,12 @@ section {
     content: "";
     position: absolute;
     top: 20px;
-    right: 40px; 
-    width: 150px;  
+    right: 40px;
+    width: 150px;
     height: 150px;
     background: url("img/medalla.png") no-repeat center/contain;
     opacity: 0.6;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 
@@ -364,14 +364,16 @@ section {
     display: block;
     width: 100%;
     height: 100%;
-    background: rgba(200, 200, 200, 0.4); /* gris translúcido */
+    background: rgba(200, 200, 200, 0.4);
+    /* gris translúcido */
     border-radius: 8px;
     padding: 80px 40px;
     font-size: 1.2rem;
     font-weight: 500;
-    color: #333; /* texto gris oscuro */
+    color: #333;
+    /* texto gris oscuro */
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     user-select: none;
 }
 
@@ -620,4 +622,422 @@ h2 {
 p,
 li {
     font-size: 1.2rem;
+}
+
+
+/* RESPONSIVE STYLES */
+
+/* Viewport moderno para que cada slide siga siendo una “pantalla” real */
+header,
+section {
+    flex: 0 0 100svw;
+    /* ancho = pantalla */
+    min-height: 100svh;
+    /* alto mínimo pantalla */
+}
+
+@supports (height: 100dvh) {
+
+    header,
+    section {
+        min-height: 100dvh;
+    }
+}
+
+/* Transiciones y motion accesible */
+@media (prefers-reduced-motion: reduce) {
+    .horizontal-scroll {
+        transition: none !important;
+    }
+
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Evitar “rebotes” / overscroll en móvil */
+html,
+body {
+    overscroll-behavior: none;
+}
+
+/* ======= FIXES GLOBALES ======= */
+/* (1) PROYECTOS: aire para título + filtros (sin solape) */
+#projects {
+    padding-top: 110px;
+}
+
+/* antes ~60px */
+#projects .projects-filter {
+    margin: 12px auto 14px !important;
+}
+
+#projects .projects-grid {
+    margin-top: 24px;
+}
+
+/* (2) CERTIFICACIONES: encapsular carrusel para que no “sangre” fuera */
+#certifications {
+    overflow: hidden;
+    /* recorta el 3D dentro de la sección */
+    perspective: 1000px;
+    /* mantiene tu profundidad */
+    position: relative;
+    isolation: isolate;
+    /* stacking context propio */
+    z-index: 0;
+}
+
+/* === ≤ 1400px (desktop mediano) === */
+@media (max-width: 1400px) {
+    #frontpage .name-box {
+        transform: translate(-280px, 0);
+        padding: 14px 68px;
+    }
+
+    .skills-logos {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 22px;
+    }
+
+    /* 6→5 */
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px;
+    }
+
+    /* 4→3 */
+}
+
+/* === ≤ 1200px (laptops) === */
+@media (max-width: 1200px) {
+    .skills-logos img {
+        width: 56px;
+    }
+
+    .projects-title,
+    .skills-title,
+    .certifications-title,
+    #about .about-title {
+        top: 32px;
+        left: 32px;
+    }
+
+    .project-card {
+        max-width: 230px;
+    }
+
+    .project-card a,
+    .project-card span {
+        padding: 70px 32px;
+    }
+
+    /* Proyectos: ajusta aire en este breakpoint también */
+    #projects {
+        padding-top: 104px;
+    }
+}
+
+/* === ≤ 992px (tablets grandes en horizontal) === */
+@media (max-width: 992px) {
+
+    /* Sidebar un poco más estrecha, sigue flotando encima del carrusel horizontal */
+    .sidebar {
+        width: 270px;
+        left: -290px;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .menu-toggle {
+        left: 16px;
+    }
+
+    #about {
+        padding: 48px;
+    }
+
+    #about .about-text {
+        max-width: 560px;
+        font-size: 1.1rem;
+        transform: translateY(20px);
+    }
+
+    .skills-logos {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    /* 5→4 */
+    .skills-logos img {
+        width: 54px;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+        max-width: 900px;
+    }
+
+    .project-card a,
+    .project-card span {
+        padding: 58px 26px;
+    }
+
+    /* Carrusel 3D un poco más compacto —> scopeado a CERTIFICACIONES */
+    #certifications .carousel {
+        width: 260px;
+        height: 180px;
+    }
+
+    #certifications .carousel-item {
+        width: 260px;
+        height: 140px;
+    }
+
+    #certifications .carousel-item:nth-child(1) {
+        transform: rotateY(0) translateZ(340px);
+    }
+
+    #certifications .carousel-item:nth-child(2) {
+        transform: rotateY(90deg) translateZ(340px);
+    }
+
+    #certifications .carousel-item:nth-child(3) {
+        transform: rotateY(180deg) translateZ(340px);
+    }
+
+    #certifications .carousel-item:nth-child(4) {
+        transform: rotateY(270deg) translateZ(340px);
+    }
+
+    /* Proyectos: un pelín menos de padding top en pantallas más compactas */
+    #projects {
+        padding-top: 100px;
+    }
+}
+
+/* === ≤ 768px (tablets / móviles en horizontal) === */
+@media (max-width: 768px) {
+
+    /* Mantenemos HORIZONTAL: cada slide sigue midiendo 100svw/100dvh */
+    .menu-toggle {
+        top: 16px;
+        transform: none;
+        font-size: 20px;
+        padding: 8px 12px;
+        box-shadow: none;
+    }
+
+    #frontpage .name-box {
+        transform: translate(-200px, 0);
+        padding: 12px 40px;
+    }
+
+    #frontpage .name-box h1 {
+        font-size: 1.05rem;
+        letter-spacing: .14rem;
+    }
+
+    #about {
+        padding: 40px;
+    }
+
+    #about .about-title {
+        font-size: 1.6rem;
+        top: 24px;
+        left: 24px;
+    }
+
+    #about .about-text {
+        font-size: 1rem;
+        max-width: 520px;
+        margin-top: -24px;
+        transform: translateY(0);
+    }
+
+    #skills {
+        padding: 40px;
+    }
+
+    #skills::before {
+        width: 120px;
+        height: 120px;
+        top: 10px;
+        right: 16px;
+        opacity: .45;
+    }
+
+    .skills-logos {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        max-width: 620px;
+    }
+
+    /* 4→3 */
+    .skills-logos img {
+        width: 50px;
+    }
+
+    .projects-title {
+        top: 24px;
+        left: 24px;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        max-width: 700px;
+    }
+
+    /* 3→2 */
+    .project-card {
+        max-width: none;
+    }
+
+    .project-card a,
+    .project-card span {
+        padding: 46px 22px;
+        font-size: 1.05rem;
+    }
+
+    .certifications-title {
+        top: 24px;
+        left: 24px;
+    }
+
+    #certifications .carousel {
+        width: 240px;
+        height: 160px;
+        margin: 36px auto 60px;
+    }
+
+    #certifications .carousel-item {
+        width: 240px;
+        height: 130px;
+    }
+
+    #certifications .carousel-controls {
+        bottom: 70px;
+    }
+
+    .contact-title {
+        font-size: 3.4rem;
+        padding-bottom: 12px;
+    }
+
+    .social-icons {
+        gap: 18px;
+        margin: 28px 0;
+    }
+
+    .social-icons a img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .contact-quote {
+        font-size: 1.1rem;
+    }
+
+    /* Proyectos: ajuste de aire acorde al título a 24px */
+    #projects {
+        padding-top: 96px;
+    }
+}
+
+/* === ≤ 560px (móvil en horizontal y vertical) === */
+@media (max-width: 560px) {
+
+    /* Seguimos horizontal: cada sección ocupa toda la “pantalla” del móvil */
+    #frontpage .name-box {
+        transform: translate(-120px, 0);
+        padding: 10px 28px;
+    }
+
+    .skills-logos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    /* 3→2 */
+    .skills-logos img {
+        width: 46px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        max-width: 480px;
+    }
+
+    .project-card a,
+    .project-card span {
+        padding: 36px 18px;
+    }
+
+    .sidebar {
+        width: 86vw;
+        left: -90vw;
+    }
+
+    .sidebar nav ul li {
+        margin: 10px 0;
+    }
+
+    .sidebar nav ul li a {
+        font-size: 1rem;
+    }
+
+    #certifications .carousel-controls button {
+        padding: 8px 14px;
+        font-size: .95rem;
+    }
+
+    /* Proyectos: un poco menos de aire en móviles muy pequeños */
+    #projects {
+        padding-top: 92px;
+    }
+}
+
+/* Orientación apaisada baja altura (teclado abierto, notch, etc.) */
+@media (orientation: landscape) and (max-height: 460px) {
+
+    header,
+    section {
+        min-height: 100svh;
+        padding: 20px;
+    }
+
+    .contact-title {
+        font-size: 2.4rem;
+    }
+}
+
+
+/* ================= OVERRIDE: viewport alto real =================
+   Asegura que cada slide use el alto real del viewport en móviles.
+   Anula 'height: 100vh' previos que puedan existir.
+================================================================= */
+.horizontal-scroll {
+    height: 100svh !important;
+}
+
+header,
+section {
+    height: 100svh !important;
+}
+
+@supports (height: 100dvh) {
+    .horizontal-scroll {
+        height: 100dvh !important;
+    }
+
+    header,
+    section {
+        height: 100dvh !important;
+    }
 }
