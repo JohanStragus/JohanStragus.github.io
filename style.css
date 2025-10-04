@@ -310,8 +310,7 @@ section {
     right: 40px;
     font-family: "Tangerine", cursive;
     font-size: 2rem;
-    opacity: 0.8;
-    color: #ffffff;
+    opacity: 0.7;
 }
 
 
@@ -452,7 +451,7 @@ section {
 
 /*========================= CERTIFICATIONS ==========================*/
 #certifications {
-    background: #fff;
+    background: url("img/espacio.jpg") center center / cover no-repeat;
     color: #111;
     position: relative;
     padding: 60px;
@@ -467,6 +466,7 @@ section {
     left: 40px;
     font-size: 2rem;
     font-weight: 700;
+    color: #ffffff;
 }
 
 .carousel {
@@ -626,13 +626,6 @@ li {
 
 
 /* RESPONSIVE STYLES */
-/* ==================================================================
-   RESPONSIVE (HORIZONTAL) — Versión actualizada con FIX de alineación
-   Mantiene navegación horizontal. Ancho exacto por slide = 100vw.
-   Altura moderna con svh/dvh. Ajustes de portada, proyectos y carrusel.
-   ================================================================== */
-
-/* --- SLIDE WIDTH ALIGNMENT FIX --- */
 *,
 *::before,
 *::after {
