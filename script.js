@@ -1,25 +1,26 @@
 // VARIABLES
-const container = document.querySelector('.horizontal-scroll'); // contenedor principal
-const sections = document.querySelectorAll('header, section'); // todas las secciones
-const menuToggle = document.getElementById("menu-toggle");
-const sidebar = document.getElementById("sidebar");
-const sidebarLinks = document.querySelectorAll(".sidebar nav ul li a");
-const closeBtn = document.getElementById("close-sidebar"); // botón cerrar
-const carousel = document.querySelector(".carousel");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const filterBtns = document.querySelectorAll('.projects-filter .filter-btn');
-const projectCards = document.querySelectorAll('.projects-grid .project-card');
+const container = document.querySelector('.horizontal-scroll'); // contenedor
+const sections = document.querySelectorAll('header, section'); // secciones
+const menuToggle = document.getElementById("menu-toggle"); // menú
+const sidebar = document.getElementById("sidebar"); // sidebar
+const sidebarLinks = document.querySelectorAll(".sidebar nav ul li a"); // enlaces
+const closeBtn = document.getElementById("close-sidebar"); // cerrar botón
+const carousel = document.querySelector(".carousel"); // carrusel
+const prevBtn = document.getElementById("prevBtn"); // anterior botón
+const nextBtn = document.getElementById("nextBtn"); // siguiente botón
+const filterBtns = document.querySelectorAll('.projects-filter .filter-btn'); // filtros
+const projectCards = document.querySelectorAll('.projects-grid .project-card'); // proyectos
 
-let currentIndex = 0;
-let angle = 0;
+let currentIndex = 0; // índice
+let angle = 0; // ángulo
 
-// Helpers sidebar accesible
+// para saber si el sidebar está abierto
 const isSidebarOpen = () => sidebar.classList.contains("active");
 
+/* función abre el menú lateral, oculta el botón hamburguesa, ajusta atributos de accesibilidad*/
 function openSidebar() {
     sidebar.classList.add("active");
-    menuToggle.classList.add("hidden");               // ocultar el botón ☰
+    menuToggle.classList.add("hidden");       
     // Accesibilidad:
     sidebar.setAttribute("aria-hidden", "false");
     menuToggle.setAttribute("aria-expanded", "true");
@@ -27,9 +28,10 @@ function openSidebar() {
     if (closeBtn) closeBtn.focus();
 }
 
+// función cierra el menú lateral, muestra el botón hamburguesa, ajusta atributos de accesibilidad
 function closeSidebar() {
     sidebar.classList.remove("active");
-    menuToggle.classList.remove("hidden");            // volver a mostrar el botón ☰
+    menuToggle.classList.remove("hidden");
     // Accesibilidad:
     sidebar.setAttribute("aria-hidden", "true");
     menuToggle.setAttribute("aria-expanded", "false");
@@ -48,7 +50,7 @@ function showSection(index) {
     container.style.transform = `translateX(${offset}px)`;
 }
 
-// Scroll vertical → navegación horizontal (solo si el sidebar NO está abierto)
+// Scroll vertical navegación horizontal (solo si el sidebar NO está abierto)
 window.addEventListener('wheel', (e) => {
     if (isSidebarOpen()) return; // no navegar si el menú está abierto
     if (e.deltaY > 0) {
@@ -71,9 +73,9 @@ menuToggle.addEventListener("click", () => {
 // Ir a la sección y cerrar sidebar
 sidebarLinks.forEach((link, i) => {
     link.addEventListener("click", (e) => {
-        e.preventDefault();              // evitar salto brusco del #id
-        showSection(i);                  // mover horizontalmente
-        closeSidebar();                  // cerrar sidebar con ARIA/foco
+        e.preventDefault(); // evitar salto brusco del #id
+        showSection(i);    // mover horizontalmente
+        closeSidebar();   // cerrar sidebar con ARIA/foco
     });
 });
 
@@ -107,8 +109,7 @@ if (prevBtn && nextBtn && carousel) {
 /////////////// FIN APARTADO CARRUSEL 3D //////////////////
 
 
-// === Filtrado de proyectos por herramienta ===
-
+// FILTRADOR DE PROYECTOS
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         // estado activo de botones
