@@ -1,87 +1,151 @@
-/* ----- Reset general y box-sizing ----- */
-* {
+/* ========================================= */
+/* ============== RESET & BASE ============= */
+/* ========================================= */
+
+/* Reset general y box-sizing */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ----- Fuente personalizada "Apparel" ----- */
+/* Fuente personalizada "Apparel" */
 @font-face {
     font-family: 'Apparel';
     src: url('fonts/Apparel-Regular.woff2') format('woff2'),
-        url('fonts/Apparel-Regular.woff') format('woff');
+         url('fonts/Apparel-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 
-/* ----- Estructura general del documento ----- */
+/* Estructura general del documento */
 html,
 body {
     height: 100%;
     overflow: hidden;
+    overscroll-behavior: none;
     font-family: 'Apparel', serif;
 }
 
-/* ----- Scroll horizontal del portfolio ----- */
+/* Scroll horizontal del portfolio */
 .horizontal-scroll {
     display: flex;
     height: 100vh;
     width: max-content;
     transition: transform 0.6s ease;
+    overflow: hidden;
 }
 
-/* ----- Secciones a pantalla completa ----- */
+/* Secciones a pantalla completa */
 header,
 section {
     flex: 0 0 100vw;
+    width: 100vw;
     height: 100vh;
+    min-height: 100svh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     text-align: center;
     padding: 40px;
+    margin: 0;
 }
 
-/*========================= Portada ==========================*/
+@supports (height: 100dvh) {
+    header,
+    section {
+        min-height: 100dvh;
+    }
 
-/* ----- Imagen de fondo principal ----- */
+    .horizontal-scroll {
+        height: 100dvh;
+    }
+}
+
+/* Enfoque visible accesible (solo teclado) */
+:focus-visible {
+    outline: 3px solid #FFD700;
+    outline-offset: 2px;
+}
+
+/* Encabezados generales */
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-family: 'Apparel', serif;
+}
+
+/* Texto general y listas */
+p,
+li {
+    font-size: 1.2rem;
+}
+
+/* Preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    .horizontal-scroll {
+        transition: none !important;
+    }
+
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ========================================= */
+/* ================ PORTADA ================ */
+/* ========================================= */
+
 #frontpage {
     background: url("img/portada.jpg") center center / cover no-repeat;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: max(40px, var(--safe-top));
+    padding-left: max(40px, var(--safe-left));
+    padding-right: max(40px, var(--safe-right));
+    padding-bottom: max(40px, var(--safe-bottom));
 }
 
-/* ----- Caja blanca con el nombre ----- */
+/* Caja blanca con el nombre */
 #frontpage .name-box {
-    background: white;
-    padding: 15px 86px;
+    background: #fff;
     border-radius: 4px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    transform: translate(-380px, 0px);
+    max-width: min(88vw, 640px);
+    padding: clamp(10px, 1.8vh, 15px) clamp(26px, 8vw, 86px);
+    transform: translateX(clamp(-380px, -38vw, -120px));
 }
 
-/* ----- Título de la página ----- */
 #frontpage .name-box h1 {
-    font-size: 1.2rem;
+    font-size: clamp(0.95rem, 1.8vw + .4rem, 1.2rem);
+    letter-spacing: clamp(.08rem, .5vw, .2rem);
     font-weight: 400;
-    letter-spacing: 0.2rem;
     color: #111;
 }
 
-/* ----- Nombre en negrita ----- */
 #frontpage .name-box .bold {
     font-weight: 700;
 }
 
-/*========================= Fin Portada ==========================*/
+/* Variables de área segura (notch / bordes) */
+:root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
 
-/*========================= SIDEBAR Y BOTÓN ==========================*/
+/* ========================================= */
+/* =========== SIDEBAR Y BOTÓN ============= */
+/* ========================================= */
 
-/* ----- Panel lateral (sidebar principal) ----- */
 .sidebar {
     position: fixed;
     top: 0;
@@ -89,21 +153,24 @@ section {
     width: 305px;
     height: 100vh;
     background: #ffffff;
-    color: white;
-    transition: left 0.7s ease;
-    z-index: 100;
+    color: #111;
     border: 1px solid rgba(72, 72, 72, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
     padding-top: 0;
+    overflow-y: auto;
+    transition: left 0.7s ease;
+    z-index: 100;
 }
 
-/* ----- Estructura interna del menú ----- */
+.sidebar.active {
+    left: 0;
+}
+
+/* Navegación interna */
 .sidebar nav ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -114,8 +181,6 @@ section {
     margin: 18px 0;
 }
 
-
-/* ----- Enlaces del menú ----- */
 .sidebar nav ul li a {
     position: relative;
     display: inline-block;
@@ -128,7 +193,7 @@ section {
     transition: padding-left 0.3s ease, color 0.3s;
 }
 
-/* ----- Flecha decorativa (oculta por defecto) ----- */
+/* Flecha decorativa */
 .sidebar nav ul li a::before {
     content: "➔";
     position: absolute;
@@ -139,8 +204,6 @@ section {
     color: #111;
 }
 
-
-/* ----- Hover: movimiento de texto + aparición de flecha ----- */
 .sidebar nav ul li a:hover {
     color: #aaa;
     padding-left: 10px;
@@ -151,11 +214,7 @@ section {
     transform: translateX(0);
 }
 
-.sidebar.active {
-    left: 0;
-}
-
-/* ----- Botón hamburguesa estilo burbuja ----- */
+/* Botón hamburguesa */
 .menu-toggle {
     position: fixed;
     top: 50%;
@@ -164,7 +223,7 @@ section {
     font-size: 24px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.7);
-    color: white;
+    color: #fff;
     cursor: pointer;
     z-index: 110;
     padding: 10px 14px;
@@ -174,19 +233,16 @@ section {
     text-shadow: 0 0 4px rgba(65, 65, 65, 3);
 }
 
-/* ----- Hover: efecto de iluminación y escala ----- */
 .menu-toggle:hover {
     border-color: #fff;
     transform: translateY(-50%) scale(1.2);
 }
 
-/* ----- Estado oculto cuando el sidebar está abierto ----- */
 .menu-toggle.hidden {
     display: none;
 }
 
-
-/* ----- Botón de cerrar dentro del sidebar ----- */
+/* Botón cerrar sidebar */
 .close-btn {
     position: absolute;
     top: 15px;
@@ -194,36 +250,31 @@ section {
     font-size: 22px;
     background: none;
     border: none;
-    color: rgb(0, 0, 0);
+    color: #000;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.2s ease;
 }
 
-/* ----- Hover: cambio de color y escala ----- */
 .close-btn:hover {
     color: #aaa;
     transform: scale(1.1);
 }
 
-/*========================= FIN SIDEBAR Y BOTÓN ==========================*/
+/* ========================================= */
+/* ================= ABOUT ================ */
+/* ========================================= */
 
-
-/*========================= ABOUT ME ==========================*/
-
-/* ----- Contenedor general de la sección ----- */
 #about {
     background: #fffdfd;
-    color: #000000;
+    color: #000;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: left;
     padding: 60px;
-
 }
 
-/* ----- Título superior izquierdo ----- */
 #about .about-title {
     position: absolute;
     top: 40px;
@@ -232,7 +283,6 @@ section {
     font-weight: 700;
 }
 
-/* ----- Texto principal ----- */
 #about .about-text {
     max-width: 600px;
     font-size: 1.2rem;
@@ -242,7 +292,6 @@ section {
     font-family: Adobe Garamond Pro, serif;
 }
 
-/* ----- Firma decorativa (parte inferior derecha) ----- */
 #about .about-signature {
     position: absolute;
     bottom: 40px;
@@ -252,23 +301,18 @@ section {
     opacity: 0.7;
 }
 
-/*========================= FIN ABOUT ME ==========================*/
+/* ========================================= */
+/* ================= SKILLS =============== */
+/* ========================================= */
 
-
-
-
-/*========================= SKILLS ==========================*/
-
-/* ----- Contenedor general de la sección ----- */
 #skills {
     background: rgb(249, 244, 244);
-    color: #000000;
+    color: #000;
     position: relative;
     padding: 60px;
     text-align: center;
 }
 
-/* ----- Icono decorativo (medalla superior derecha) ----- */
 #skills::before {
     content: "";
     position: absolute;
@@ -281,8 +325,6 @@ section {
     pointer-events: none;
 }
 
-
-/* ----- Título superior izquierdo ----- */
 .skills-title {
     position: absolute;
     top: 40px;
@@ -292,28 +334,27 @@ section {
     padding-bottom: 5px;
 }
 
-/* ----- Grid de logos de habilidades ----- */
 .skills-logos {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 25px;
     justify-items: center;
     align-items: center;
-    margin-top: 0px;
     width: 100%;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 }
 
-/* ----- Estilo individual de cada logo ----- */
 .skills-logos img {
     width: 60px;
     height: auto;
     transition: transform 0.3s ease;
 }
 
-/* ----- Firma decorativa (parte inferior derecha) ----- */
+.skills-logos img:hover {
+    transform: scale(1.2);
+}
+
 .skills-signature {
     position: absolute;
     bottom: 20px;
@@ -323,26 +364,20 @@ section {
     opacity: 0.7;
 }
 
-/* ----- Efecto hover sobre los logos ----- */
-.skills-logos img:hover {
-    transform: scale(1.2);
-}
+/* ========================================= */
+/* ================ PROJECTS =============== */
+/* ========================================= */
 
-/*========================= FIN SKILLS ==========================*/
-
-
-/*========================= PROJECTS ==========================*/
-
-/* ----- Contenedor general de la sección ----- */
 #projects {
     background: url("img/test.jpg") center center / cover no-repeat;
     color: #111;
     position: relative;
     padding: 60px;
+    padding-top: 110px;
     text-align: center;
+    justify-content: flex-start;
 }
 
-/* ----- Título superior izquierdo ----- */
 .projects-title {
     position: absolute;
     top: 40px;
@@ -351,93 +386,16 @@ section {
     font-weight: 700;
 }
 
-/* ----- Grid de proyectos ----- */
-.projects-grid {
-    list-style: none;
-    padding: 0;
-    margin: 60px auto 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    justify-items: center;
-    align-items: center;
-    width: 100%;
-    max-width: 1000px;
-}
-
-/* ----- Tarjeta individual ----- */
-.project-card {
-    width: 100%;
-    max-width: 250px;
-}
-
-/* ----- Tarjetas de “Próximamente” ----- */
-.project-card span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: rgba(200, 200, 200, 0.4);
-    border-radius: 8px;
-    padding: 80px 40px;
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #333;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    user-select: none;
-}
-
-
-/* ----- Enlace con apariencia de tarjeta ----- */
-.project-card a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: white;
-    border-radius: 8px;
-    padding: 80px 40px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: inherit;
-    text-decoration: none;
-    text-align: center;
-    transition: transform 0.4s ease, box-shadow 0.2s ease;
-}
-
-/* ----- Estado deshabilitado (sin enlace) ----- */
-.project-card a[aria-disabled="true"] {
-    pointer-events: none;
-    opacity: 0.6;
-    cursor: default;
-}
-
-
-/* ----- Hover sobre la tarjeta ----- */
-.project-card a:hover {
-    transform: translateY(-8px);
-    box-shadow: 0px 25px 80px rgb(255, 102, 0);
-}
-
-/* ----- Enfoque accesible visible ----- */
-.project-card a:focus-visible {
-    outline: 3px solid #FFD700;
-    outline-offset: 4px;
-    border-radius: 8px;
-}
-
-/* ----- Filtro de categorías ----- */
 .projects-filter {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
     align-items: center;
-    margin: -65px auto -10px;
+    margin: 12px auto 14px;
     max-width: 1000px;
 }
 
-/* ----- Botones de filtro ----- */
 .filter-btn {
     background: #fff;
     border: 2px solid #111;
@@ -448,35 +406,94 @@ section {
     transition: background .2s, color .2s, transform .1s;
 }
 
-/* ----- Hover sobre los botones ----- */
 .filter-btn:hover {
     transform: translateY(-1px);
 }
 
-/* ----- Estado activo del botón ----- */
 .filter-btn.active {
     background: #111;
     color: #fff;
 }
 
-/*========================= FIN PROJECTS ==========================*/
+.projects-grid {
+    list-style: none;
+    padding: 0;
+    margin: 24px auto 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+}
 
+.project-card {
+    width: 100%;
+    max-width: 250px;
+}
 
+.project-card a,
+.project-card span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    padding: 80px 40px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
 
+/* “Próximamente” */
+.project-card span {
+    background: rgba(200, 200, 200, 0.4);
+    color: #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    user-select: none;
+}
 
-/*========================= CERTIFICATIONS ==========================*/
+/* Tarjetas con enlace */
+.project-card a {
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.4s ease, box-shadow 0.2s ease;
+}
 
-/* ----- Contenedor general de la sección ----- */
+.project-card a:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 80px rgb(255, 102, 0);
+}
+
+.project-card a[aria-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: default;
+}
+
+.project-card a:focus-visible {
+    outline: 3px solid #FFD700;
+    outline-offset: 4px;
+}
+
+/* ========================================= */
+/* ============= CERTIFICATIONS ============ */
+/* ========================================= */
+
 #certifications {
-    background: url("img/espacio.jpg") center center / cover no-repeat;
+    background: url("img/test.jpg") center center / cover no-repeat;
     color: #111;
     position: relative;
     padding: 60px;
     text-align: center;
     perspective: 1000px;
+    overflow: hidden;
+    isolation: isolate;
+    z-index: 0;
 }
 
-/* ----- Título superior izquierdo ----- */
 .certifications-title {
     position: absolute;
     top: 40px;
@@ -486,7 +503,6 @@ section {
     color: #ffffff;
 }
 
-/* ----- Contenedor del carrusel ----- */
 .carousel {
     width: 300px;
     height: 200px;
@@ -496,7 +512,6 @@ section {
     transition: transform 1s;
 }
 
-/* ----- Cada tarjeta del carrusel ----- */
 .carousel-item {
     position: absolute;
     top: 10px;
@@ -510,7 +525,6 @@ section {
     font-weight: 600;
 }
 
-/* ----- Imagen dentro del carrusel ----- */
 .carousel-item img {
     max-width: 100%;
     max-height: 100%;
@@ -519,7 +533,6 @@ section {
     margin: 0 auto;
 }
 
-/* ----- Contenedor de botones de control ----- */
 .carousel-controls {
     position: absolute;
     bottom: 100px;
@@ -530,7 +543,6 @@ section {
     z-index: 2;
 }
 
-/* ----- Botones (Prev / Next) ----- */
 .carousel-controls button {
     background: #fff;
     border: 2px solid #111;
@@ -542,15 +554,13 @@ section {
     transition: background 0.3s, color 0.3s, transform 0.2s;
 }
 
-/* ----- Hover: cambio de color y escala ----- */
 .carousel-controls button:hover {
     background: #111;
     color: #fff;
     transform: scale(1.05);
 }
 
-
-/* ----- Distribución de los 4 ítems en círculo 3D ----- */
+/* Distribución 3D */
 .carousel-item:nth-child(1) {
     transform: rotateY(0deg) translateZ(400px);
 }
@@ -567,13 +577,10 @@ section {
     transform: rotateY(270deg) translateZ(400px);
 }
 
+/* ========================================= */
+/* ================= CONTACT =============== */
+/* ========================================= */
 
-/*========================= FIN CERTIFICATIONS ==========================*/
-
-
-/* ========================= CONTACT ========================== */
-
-/* ----- Contenedor general de la sección ----- */
 #contact {
     background: url("img/test4.jpg") center center / cover no-repeat;
     color: #111;
@@ -582,7 +589,6 @@ section {
     text-align: center;
 }
 
-/* ----- Título principal ----- */
 .contact-title {
     font-size: 5rem;
     font-weight: 700;
@@ -590,10 +596,9 @@ section {
     display: inline-block;
     padding-bottom: 30px;
     font-family: 'Apparel', serif;
-    color: rgb(255, 255, 255);
+    color: #fff;
 }
 
-/* ----- Contenedor de iconos ----- */
 .social-icons {
     display: flex;
     justify-content: center;
@@ -601,222 +606,30 @@ section {
     margin: 40px 0;
 }
 
-/* ----- Estilo general de los iconos ----- */
 .social-icons a img {
     width: 50px;
     height: 50px;
     transition: transform 0.3s, opacity 0.3s;
 }
 
-/* ----- Hover: aumento y efecto de opacidad ----- */
 .social-icons a img:hover {
     transform: scale(1.3);
     opacity: 0.8;
 }
 
-/* ----- Cita o frase de cierre ----- */
 .contact-quote {
     margin-top: 40px;
     font-size: 1.4rem;
     font-style: italic;
     opacity: 0.8;
-    color: rgb(255, 255, 255);
+    color: #fff;
 }
-
-/* ========================= FIN CONTACT ========================= */
-
-
-
-
-
-/* ========================================= */
-/* ======== ESTILOS GENERALES / BASE ======== */
-/* ========================================= */
-
-/* ----- Enfoque visible accesible (solo al usar teclado) ----- */
-:focus-visible {
-    outline: 3px solid #FFD700;
-    outline-offset: 2px;
-}
-
-/* ----- Sidebar: permitir scroll si el contenido crece ----- */
-.sidebar {
-    overflow-y: auto;
-}
-
-/* ----- Encabezados (nivel 2) ----- */
-h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    font-family: 'Apparel', serif;
-}
-
-/* ----- Texto general y listas ----- */
-p,
-li {
-    font-size: 1.2rem;
-}
-
-/* ========================================= */
-/* =========== FIN ESTILOS BASE ============ */
-/* ========================================= */
-
-
-
-
-/* ========================================= */
-/* ============== RESPONSIVE =============== */
-/* ========================================= */
-
-/* ----- Modelo de caja global ----- */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-/* ----- Control de scroll horizontal ----- */
-.horizontal-scroll {
-    overflow: hidden;
-}
-
-/* ----- Secciones: ancho completo del viewport ----- */
-header,
-section {
-    flex: 0 0 100vw !important;
-    /* ancho del slide = innerWidth */
-    width: 100vw !important;
-    margin: 0;
-}
-
-/* ----- Altura dinámica (svh / dvh para móviles) ----- */
-header,
-section {
-    min-height: 100svh;
-}
-
-@supports (height: 100dvh) {
-
-    header,
-    section {
-        min-height: 100dvh;
-    }
-}
-
-/* ----- Ajuste de altura del contenedor principal ----- */
-.horizontal-scroll {
-    height: 100svh !important;
-}
-
-@supports (height: 100dvh) {
-    .horizontal-scroll {
-        height: 100dvh !important;
-    }
-}
-
-/* ========================================= */
-/* ============ ACCESIBILIDAD ============== */
-/* ========================================= */
-
-/* ----- Preferencia de movimiento reducido ----- */
-@media (prefers-reduced-motion: reduce) {
-    .horizontal-scroll {
-        transition: none !important;
-    }
-
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
-}
-
-/* ----- Evitar rebote en dispositivos móviles ----- */
-html,
-body {
-    overscroll-behavior: none;
-}
-
-/* ========================================= */
-/* ============ FIXES GLOBALES ============= */
-/* ========================================= */
-
-/* ----- Ajustes generales de Projects ----- */
-#projects {
-    padding-top: 110px;
-}
-
-#projects .projects-filter {
-    margin: 12px auto 14px !important;
-}
-
-#projects .projects-grid {
-    margin-top: 24px;
-}
-
-/* ----- Estructura y perspectiva del carrusel 3D ----- */
-#certifications {
-    overflow: hidden;
-    perspective: 1000px;
-    position: relative;
-    isolation: isolate;
-    z-index: 0;
-}
-
-#certifications .carousel {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 1s;
-}
-
-#certifications .carousel-item {
-    position: absolute;
-    top: 10px;
-    left: 0;
-}
-
-#certifications .carousel-controls {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
-    z-index: 1;
-}
-
-/* ----- Portada: caja de nombre adaptable ----- */
-#frontpage .name-box {
-    max-width: min(88vw, 640px);
-    padding: clamp(10px, 1.8vh, 15px) clamp(26px, 8vw, 86px);
-    transform: translateX(clamp(-380px, -38vw, -120px));
-}
-
-#frontpage .name-box h1 {
-    font-size: clamp(0.95rem, 1.8vw + .4rem, 1.2rem);
-    letter-spacing: clamp(.08rem, .5vw, .2rem);
-}
-
-/* ----- Variables de área segura (notch / bordes) ----- */
-:root {
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-left: env(safe-area-inset-left, 0px);
-    --safe-right: env(safe-area-inset-right, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-#frontpage {
-    padding-top: max(40px, var(--safe-top));
-    padding-left: max(40px, var(--safe-left));
-    padding-right: max(40px, var(--safe-right));
-    padding-bottom: max(40px, var(--safe-bottom));
-}
-
 
 /* ========================================= */
 /* ============== BREAKPOINTS ============== */
 /* ========================================= */
 
-/* ===== ≤ 1400px ===== */
-/* Ajustes de portada, skills y projects */
+/* ≤ 1400px */
 @media (max-width: 1400px) {
     #frontpage .name-box {
         transform: translateX(clamp(-320px, -32vw, -120px));
@@ -834,8 +647,7 @@ body {
     }
 }
 
-/* ===== ≤ 1200px ===== */
-/* Reducción de tamaños, márgenes y espaciado general */
+/* ≤ 1200px */
 @media (max-width: 1200px) {
     .skills-logos img {
         width: 56px;
@@ -869,16 +681,11 @@ body {
     }
 }
 
-/* ===== ≤ 992px ===== */
-/* Ajustes para pantallas medianas y sidebar reducido */
+/* ≤ 992px */
 @media (max-width: 992px) {
     .sidebar {
         width: 270px;
         left: -290px;
-    }
-
-    .sidebar.active {
-        left: 0;
     }
 
     .menu-toggle {
@@ -896,8 +703,7 @@ body {
     }
 
     .skills-logos {
-        display: grid;
-        grid-template-columns: repeat(4);
+        grid-template-columns: repeat(4, 1fr);
         row-gap: 18px;
         column-gap: 50px;
         max-width: 620px;
@@ -908,7 +714,7 @@ body {
     }
 
     .projects-grid {
-        grid-template-columns: repeat(3);
+        grid-template-columns: repeat(3, 1fr);
         gap: 22px;
         max-width: 900px;
     }
@@ -928,7 +734,6 @@ body {
         height: 140px;
     }
 
-    /* Reajuste de profundidad del carrusel 3D */
     #certifications .carousel-item:nth-child(1) {
         transform: rotateY(0) translateZ(340px);
     }
@@ -954,8 +759,7 @@ body {
     }
 }
 
-/* ===== ≤ 768px ===== */
-/* Reajustes generales para tablets y pantallas medianas */
+/* ≤ 768px */
 @media (max-width: 768px) {
     .menu-toggle {
         top: 16px;
@@ -1005,8 +809,7 @@ body {
     }
 
     .skills-logos {
-        display: grid;
-        grid-template-columns: repeat(4);
+        grid-template-columns: repeat(4, 1fr);
         gap: 18px;
         max-width: 620px;
         column-gap: 8px;
@@ -1081,8 +884,7 @@ body {
     }
 }
 
-/* ===== ≤ 560px ===== */
-/* Layout móvil: grids reducidos y sidebar adaptable */
+/* ≤ 560px */
 @media (max-width: 560px) {
     #frontpage .name-box {
         transform: translateX(clamp(-140px, -22vw, -60px));
@@ -1132,15 +934,13 @@ body {
     }
 }
 
-/* ===== ≤ 380px ===== */
-/* Layout ultra compacto: filtros y tarjetas simplificados */
+/* ≤ 380px */
 @media (max-width: 380px) {
     #frontpage .name-box {
         transform: none;
         margin: 0 auto;
     }
 
-    /* más aire arriba para título + filtro */
     #projects {
         padding: 118px 16px 40px;
     }
@@ -1151,11 +951,10 @@ body {
         font-size: 1.6rem;
     }
 
-    /* filtrador compacto y separado del grid */
     #projects .projects-filter {
         flex-wrap: wrap;
         gap: 8px;
-        margin: 16px auto 12px !important;
+        margin: 16px auto 12px;
         padding: 0 6px;
     }
 
@@ -1164,28 +963,20 @@ body {
         font-size: .9rem;
     }
 
-    /* grid en una columna para que respire y no se solape */
     #projects .projects-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 16px;
         max-width: 320px;
         margin: 6px auto 0;
     }
 
-    /* tarjetas más compactas */
     .project-card a,
     .project-card span {
         padding: 38px 18px;
         font-size: 1rem;
     }
 
-    /* Ajuste final del grid y botones de filtro */
-    #projects .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     #projects .projects-filter {
-        flex-wrap: wrap;
         gap: 4px;
         justify-content: center;
     }
@@ -1196,8 +987,7 @@ body {
     }
 }
 
-/* ===== Landscape ≤ 460px ===== */
-/* Optimización para orientación apaisada con poca altura */
+/* Landscape ≤ 460px */
 @media (orientation: landscape) and (max-height: 460px) {
     header,
     section {
