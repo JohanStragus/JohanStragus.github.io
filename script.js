@@ -43,34 +43,41 @@ function closeSidebar() {
 
 // Función para mostrar una sección en base a su índice
 function showSection(index) {
+    // Evitar que el indice se salga de rango.
     if (index < 0) index = 0;
     if (index >= sections.length) index = sections.length - 1;
+    // guardar sección actual
     currentIndex = index;
+    // calcular cuantó tenemos que desplazar contenedor
     const offset = -index * window.innerWidth;
+    // mover contenedor
     container.style.transform = `translateX(${offset}px)`;
 }
 
-// Scroll vertical navegación horizontal (solo si el sidebar NO está abierto)
+//  Detecta el scroll del mouse para navegar horizontalmente
 window.addEventListener('wheel', (e) => {
-    if (isSidebarOpen()) return; // no navegar si el menú está abierto
+    // Si el sidebar está abierto, no permitir la navegación
+    if (isSidebarOpen()) return;
+    // Si el scroll va hacia abajo, pasar a la siguiente sección
     if (e.deltaY > 0) {
-        showSection(currentIndex + 1); // scroll hacia abajo
+        showSection(currentIndex + 1); 
+    // Si el scroll va hacia arriba, regresar a la sección anterior
     } else if (e.deltaY < 0) {
-        showSection(currentIndex - 1); // scroll hacia arriba
+        showSection(currentIndex - 1);
     }
-}, { passive: true });
+}, { passive: true }); // Mejora el rendimiento al no bloquear el scroll
 
 //////////////// FIN APARTADO DE SCROLL HORIZONTAL //////////////////
 
 
 ///////////////// APARTADO DE SIDEBAR //////////////////
 
-// Abrir sidebar (y ocultar hamburguesa)
+// abrir el sidebar solo si no está abierto
 menuToggle.addEventListener("click", () => {
     if (!isSidebarOpen()) openSidebar();
 });
 
-// Ir a la sección y cerrar sidebar
+// Para cada enlace del sidebar:
 sidebarLinks.forEach((link, i) => {
     link.addEventListener("click", (e) => {
         e.preventDefault(); // evitar salto brusco del #id
@@ -110,21 +117,25 @@ if (prevBtn && nextBtn && carousel) {
 
 
 // FILTRADOR DE PROYECTOS
+// Al hacer click en un botón de filtro
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        // estado activo de botones
+        // Marcar el botón como activo y desactivar los demás
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
+        // obtener el valor seleccionado
         const selected = btn.dataset.tool; // 'all', 'html', 'css', etc.
-
+        // Lee las tecnologías asociadas a cada tarjeta
         projectCards.forEach(card => {
             const tools = (card.dataset.tools || '')
-                .split(',')
-                .map(s => s.trim().toLowerCase())
-                .filter(Boolean);
+                .split(',') // Separa el texto por comas
+                .map(s => s.trim().toLowerCase()) // Limpia espacios y pasa todo a minúsculas
+                .filter(Boolean); // Elimina elementos vacíos por si había comas duplicadas o valores vacíos
 
+            // Determinar si mostrar la tarjeta
             const show = (selected === 'all') || tools.includes(selected.toLowerCase());
+            // Muestra la tarjeta si show es true, o la oculta si es false
             card.style.display = show ? '' : 'none';
         });
     });
